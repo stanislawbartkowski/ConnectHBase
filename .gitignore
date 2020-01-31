@@ -1,0 +1,7 @@
+/sh/hadoop/
+/sh/hbase/
+/.idea/libraries/
+/sh/log4j.properties
+/sh/param.properties
+/target/
+/project/project/
