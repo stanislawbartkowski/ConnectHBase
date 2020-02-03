@@ -1,5 +1,8 @@
 /sh/hadoop/
 /sh/hbase/
+/sh/run.sh
+/sh/source.rc
+/sh/*keytab
 /.idea/libraries/
 /sh/log4j.properties
 /sh/param.properties
