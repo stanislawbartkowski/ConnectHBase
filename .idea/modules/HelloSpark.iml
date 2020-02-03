@@ -262,5 +262,23 @@
     <orderEntry type="library" name="sbt: com.amazonaws:aws-java-sdk-bundle:1.11.271:jar" level="project" />
     <orderEntry type="library" name="sbt: ch.qos.logback:logback-core:1.0.9:jar" level="project" />
     <orderEntry type="library" name="sbt: ch.qos.logback:logback-classic:1.0.9:jar" level="project" />
+    <orderEntry type="module-library" exported="" scope="RUNTIME">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../sh/hadoop/conf" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="" scope="RUNTIME">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../sh/hbase/conf" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

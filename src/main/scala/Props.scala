@@ -10,6 +10,8 @@ class Props {
   private val hbasefamily = "hbasefamily"
   private val hbasecolumn = "hbasecolumn"
   private val master = "master"
+  private val keytab="keytab"
+  private val principal="principal"
 
   def load(propfilename : String): Unit = {
     prop.load(new FileInputStream(propfilename));
@@ -26,6 +28,12 @@ class Props {
   def getHBaseColumn : String = prop.getProperty(hbasecolumn)
 
   def getMaster : String = prop.getProperty(master)
+
+  def getKeytab : String = prop.getProperty(keytab)
+
+  def isKerberos : Boolean = return getKeytab != null
+
+  def getPrincipal : String = prop.getProperty(principal)
 
 
 }

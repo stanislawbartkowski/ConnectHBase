@@ -6,13 +6,16 @@ object HbaseGetConn {
 
   def get(prop : Props) : Connection = {
     val conf = HBaseConfiguration.create()
-    conf.set("hadoop.security.authentication", "kerberos")
-    conf.set("hbase.security.authentication", "kerberos")
+    if (prop.isKerberos) {
+      L.info("Kerberos authentication " + prop.getPrincipal + " " + prop.getKeytab)
+      conf.set("hadoop.security.authentication", "kerberos")
+      conf.set("hbase.security.authentication", "kerberos")
 
-    //Now you need to login/authenticate using keytab:
-    UserGroupInformation.setConfiguration(conf);
-    val ugi: UserGroupInformation = UserGroupInformation.loginUserFromKeytabAndReturnUGI("sb@CENTOS.COM.REALM", "/home/sbartkowski/bin/keytabs/sb.keytab");
-    ugi.reloginFromKeytab
+      //Now you need to login/authenticate using keytab:
+      UserGroupInformation.setConfiguration(conf);
+      val ugi: UserGroupInformation = UserGroupInformation.loginUserFromKeytabAndReturnUGI(prop.getPrincipal, prop.getKeytab);
+      ugi.reloginFromKeytab
+    }
 
     ConnectionFactory.createConnection(conf)
   }
