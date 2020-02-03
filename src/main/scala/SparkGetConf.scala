@@ -5,9 +5,9 @@ object SparkGetConf {
 
   def get(prop: Props): SparkSession = {
     val conf = new SparkConf()
-    if (prop.getMaster != "") {
+    if (prop.getMaster != null) {
       conf.setMaster(prop.getMaster)
-      conf.setAppName("Word Count"):q
+      conf.setAppName("Shakespeare WordCount")
     }
     SparkSession.builder.config(conf).getOrCreate()
   }
