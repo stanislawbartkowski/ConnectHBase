@@ -48,8 +48,9 @@ Clone the repository<br>
 
 # sparktest, simple WordCount Spark job
 >  ./run.sh sparktest
-# loadhabase, loads input text file into HBase table.
+# loadhbase, loads input text file into HBase table.
 >  ./run.sh loadhbase
-
+# sparkhbase, recreates the text file from HBase table and run WorkCount
+>  ./run.sh sparkhbase
 
 
