@@ -2,7 +2,7 @@
 
 A simple solution demonstrating connection to HBase in Spark application and Kerberos environment. It comes together with Scala source code.<br>
 The program is a classic Word Count program implemented as Spark job.<br>
-There are four job available.
+There are four jobs available.
 * sparktest Simple WordCount program used to test Spark execution
 * loadhbase Standalone program, loads input file into HBase table
 * sparkhbase Recreates the text file from HBase table and runs WordCount
@@ -11,7 +11,7 @@ There are four job available.
 # Files description
 * sh
   * sh/run.sh Bash script launcher
-  * sh/resources
+  * sh/resource
     * sh/resource/shakespeare.txt Input text file
   * template
     * log4j.properties
@@ -44,7 +44,10 @@ Customize param.properties
 | hbasefamily | cf1 | Column family
 | hbasecolumn | col | Column name
 
-
+# sparktest, simple WordCount Spark job
+>  ./run.sh sparktest
+# loadhabase, loads input text file into HBase table.
+>  ./run.sh loadhbase
 
 
 
