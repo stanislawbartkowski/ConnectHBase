@@ -46,12 +46,16 @@ Clone the repository<br>
 | hbasefamily | cf1 | Column family
 | hbasecolumn | col | Column name
 
-# sparktest, simple WordCount Spark job
+# sparktest
+A simple WordCount Spark job.<br>
 >  ./run.sh sparktest
-# loadhbase, loads input text file into HBase table.
+# loadhbase
+Loads input text file into HBase table.<br>
 >  ./run.sh loadhbase
-# sparkhbase, recreates the text file from HBase table and run WorkCount
+# sparkhbase
+Recreates the text file from HBase table and run WordCount<br>
 >  ./run.sh sparkhbase
-# sparkrddhbase, recreates the RDD using spark-hbase connector and run WorkCount
+# sparkrddhbase
+Recreates the RDD using spark-hbase connector and run WordCount.
 >  ./run.sh sparkrddhbase
 
