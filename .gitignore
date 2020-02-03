@@ -1,6 +1,5 @@
 /sh/hadoop/
 /sh/hbase/
-/sh/run.sh
 /sh/source.rc
 /sh/*keytab
 /.idea/libraries/

@@ -1,0 +1,2 @@
+LIB=/usr/hdp/current/hbase-client/lib/*:/usr/hdp/current/spark2-client/jars/*
+CONF=/etc/hadoop/conf:/etc/hbase/conf
