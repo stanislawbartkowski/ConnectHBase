@@ -1,6 +1,6 @@
 # ConnectHBase
 
-A simple solution demonstrating connection to HBase in Spark application and Kerberos environment. It comes together with Scala source code.<br>
+A simple solution demonstrating a connection to HBase in Spark application and Kerberos environment. It comes together with Scala source code.<br>
 The program is a classic Word Count program implemented as Spark job.<br>
 There are four jobs available.
 * sparktest Simple WordCount program used to test Spark execution
@@ -27,7 +27,7 @@ Clone the repository<br>
 >cd ConnectHBase/sh<br>
 >cp template/* .
 
-# Constomize
+# Customize
 
 ## Customize source.rc
 
@@ -52,5 +52,6 @@ Clone the repository<br>
 >  ./run.sh loadhbase
 # sparkhbase, recreates the text file from HBase table and run WorkCount
 >  ./run.sh sparkhbase
-
+# sparkrddhbase, recreates the RDD using spark-hbase connector and run WorkCount
+>  ./run.sh sparkrddhbase
 
