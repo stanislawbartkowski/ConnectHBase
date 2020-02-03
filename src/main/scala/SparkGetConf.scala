@@ -7,7 +7,7 @@ object SparkGetConf {
     val conf = new SparkConf()
     if (prop.getMaster != "") {
       conf.setMaster(prop.getMaster)
-      conf.setAppName("Word Count")
+      conf.setAppName("Word Count"):q
     }
     SparkSession.builder.config(conf).getOrCreate()
   }
