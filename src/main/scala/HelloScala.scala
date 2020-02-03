@@ -5,6 +5,7 @@ object HelloScala {
     val SPARKTEST = "sparktest"
     val HBASELOAD = "hbaseload"
     val HBASESPARK = "hbasespark"
+    val HBASERDDSPARK = "hbaserddspark"
 
     def P(s: String): Unit = println(s)
 
@@ -17,6 +18,7 @@ object HelloScala {
       P("      " + SPARKTEST + " simple spark test, word count")
       P("      " + HBASELOAD + " load data into HBase table")
       P("      " + HBASESPARK + " run spark job using HBase table")
+      P("      " + HBASERDDSPARK + " run sparkh-base RDD job")
       System.exit(4)
     }
 
@@ -31,6 +33,7 @@ object HelloScala {
       case SPARKTEST => SparkTestJob.runSparkTest(prop)
       case HBASELOAD => LoadHbase.loadHbaseTable(prop)
       case HBASESPARK => SparkRunHBase.run(prop)
+      case HBASERDDSPARK => SparkHbase.run(prop)
       case _ => printHelp
     }
 
