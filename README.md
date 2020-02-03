@@ -27,14 +27,16 @@ Clone the repository<br>
 >cd ConnectHBase/sh<br>
 >cp template/* .
 
-Customize source.rc<br>
+# Constomize
+
+## Customize source.rc
 
 | Variable | Default value | Description
 | --- | --- | -- |
 | LIB | /usr/hdp/current/hbase-client/lib/\*:/usr/hdp/current/spark2-client/jars/\* | Spark and HBase client libraries
 | CONF | /etc/hadoop/conf:/etc/hbase/conf | Hadoop and HBase configuration
 
-Customize param.properties
+## Customize param.properties
 
 | Variable | Default value | Description
 | --- | --- | -- |
