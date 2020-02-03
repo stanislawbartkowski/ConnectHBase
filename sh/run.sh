@@ -45,7 +45,7 @@ runloadhbase() {
 runsparkhbase() {
   local -r param=$1
   removetemp
-  spark-submit --conf "spark.driver.extraClassPath=$CONF:$LIB" --class HelloScala --master yarn --name ShakespeareWordCount $HJAR $PARAM $param
+  spark-submit --files techuser.keytab#techuser.keytab --conf "spark.driver.extraClassPath=$CONF:$LIB" --class HelloScala --master yarn --name ShakespeareWordCount $HJAR $PARAM $param
 }
 
 readparam
