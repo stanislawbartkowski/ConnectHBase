@@ -9,6 +9,7 @@ help() {
     echo " sparktest : Simple wordcount spark test"
     echo " loadhbase : Load textfile into hbase"
     echo " sparkhbase : Run hbase spark job"
+    echo " sparkrddhbase : Run hbase-spark RDD job"
     exit 
 }
 
@@ -42,8 +43,9 @@ runloadhbase() {
 }
 
 runsparkhbase() {
+  local -r param=$1
   removetemp
-  spark-submit --conf "spark.driver.extraClassPath=$CONF:$LIB" --class HelloScala --master yarn --name ShakespeareWordCount $HJAR $PARAM hbasespark
+  spark-submit --conf "spark.driver.extraClassPath=$CONF:$LIB" --class HelloScala --master yarn --name ShakespeareWordCount $HJAR $PARAM $param
 }
 
 readparam
@@ -51,6 +53,7 @@ readparam
 case $1 in 
   sparktest) runsparktest;;
   loadhbase) runloadhbase;;
-  sparkhbase) runsparkhbase;;
+  sparkhbase) runsparkhbase hbasespark ;;
+  sparkrddhbase) runsparkhbase hbaserddspark ;;
   *) help;;
 esac
