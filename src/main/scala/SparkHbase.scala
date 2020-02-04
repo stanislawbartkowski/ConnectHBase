@@ -11,16 +11,6 @@ import org.apache.spark.sql.Row
 
 object SparkHbase {
 
-  val catalog1 =
-    s"""{
-       |"table":{"namespace":"default","name":"shakespeare"},
-       |"rowkey":"key",
-       |"columns":{
-       |"key":{"cf":"rowkey","col":"key","type":"string"},
-       |"line":{"cf":"cf1","col":"col","type":"string"}
-       |}
-       |}""".stripMargin
-
   val catalogpatt =
     s"""{
        |"table":{"namespace":"default","name":"#table"},
