@@ -11,7 +11,7 @@ import org.apache.spark.sql.Row
 
 object SparkHbase {
 
-  val catalog =
+  val catalog1 =
     s"""{
        |"table":{"namespace":"default","name":"shakespeare"},
        |"rowkey":"key",
@@ -21,11 +21,27 @@ object SparkHbase {
        |}
        |}""".stripMargin
 
+  val catalogpatt =
+    s"""{
+       |"table":{"namespace":"default","name":"#table"},
+       |"rowkey":"key",
+       |"columns":{
+       |"key":{"cf":"rowkey","col":"key","type":"string"},
+       |"line":{"cf":"#columnfamily","col":"#columnname","type":"string"}
+       |}
+       |}""".stripMargin
+
+
   def run(prop: Props): Unit = {
     val tableName = prop.getHBaseTable
     val fName = prop.getHBaseFamily
     val cName = prop.getHBaseColumn
     val tableN = TableName.valueOf(tableName)
+
+    val catalog = catalogpatt.replaceFirst("#table", tableName)
+      .replace("#columnfamily", fName)
+      .replace("#columnname", cName);
+
 
     L.info("Open table " + tableName)
     val ss = SparkGetConf.get(prop)
@@ -43,16 +59,16 @@ object SparkHbase {
     L.info("Number of " + num)
     // DataFrame is load, transform to RDD<String> to run WordCount
     hbaseDF.printSchema()
-    var rdd : RDD[Row] = hbaseDF.rdd
-//    val num2 = rdd.count()
-//    val r : Array[Row] = rdd.take(5)
-//    println(r(2).getAs(1))
-    val textfile : RDD[String] = hbaseDF.rdd.map({
-      row => if (row.getAs(1) == null)  "" else row.getAs(1).toString
+    var rdd: RDD[Row] = hbaseDF.rdd
+    //    val num2 = rdd.count()
+    //    val r : Array[Row] = rdd.take(5)
+    //    println(r(2).getAs(1))
+    val textfile: RDD[String] = hbaseDF.rdd.map({
+      row => if (row.getAs(1) == null) "" else row.getAs(1).toString
     })
-//    val i = 1;
-//    val num1 = textfile.count()
-    SparkTestJob.numberofwords(ss,prop,textfile)
+    //    val i = 1;
+    //    val num1 = textfile.count()
+    SparkTestJob.numberofwords(ss, prop, textfile)
   }
 
 }
