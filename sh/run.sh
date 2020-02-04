@@ -16,15 +16,19 @@ help() {
 readparam() {
   while IFS='=' read -r key value
   do
-    case $key in 
-      infile) INFILE=$value;;
-      outfile) OUTFILE=$value;;
-      keytab) KEYTAB=$value;;
-      *);;
-    esac  
+    # ignore comments
+    if [[ ${key:0:1} != "#" ]]; then
+      case $key in 
+        infile) INFILE=$value;;
+        outfile) OUTFILE=$value;;
+        keytab) KEYTAB=$value;;
+        *);;
+      esac
+    fi
   done < $PARAM
-#  echo $INFILE
-#  echo $OUTFILE
+ #echo $INFILE
+ #echo $OUTFILE
+ #cho $KEYTAB
 }
 
 removetemp() {
@@ -46,7 +50,7 @@ runloadhbase() {
 runsparkhbase() {
   local -r param=$1
   removetemp
-  spark-submit --files $KEYTAB#$KEYTAB --conf "spark.driver.extraClassPath=$CONF:$LIB" --class HelloScala --master yarn --name ShakespeareWordCount $HJAR $PARAM $param
+  spark-submit --files $KEYTAB#$KEYTAB --conf "spark.driver.extraClassPath=$CONF:$LIB" --conf "spark.executor.extraClassPath=$CONF:$LIB" --class HelloScala --master yarn --name ShakespeareWordCount $HJAR $PARAM $param
 }
 
 readparam
