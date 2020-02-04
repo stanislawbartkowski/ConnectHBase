@@ -10,7 +10,7 @@ object SparkRunHBase {
     val fName = prop.getHBaseFamily
     val cName = prop.getHBaseColumn
 
-    val connection = HbaseGetConn.get(prop)
+    val (_,connection) = HbaseGetConn.get(prop)
     val tableN = TableName.valueOf(tableName)
     val table: Table = connection.getTable(tableN)
 

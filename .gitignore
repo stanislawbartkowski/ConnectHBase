@@ -5,5 +5,8 @@
 /.idea/libraries/
 /sh/log4j.properties
 /sh/param.properties
-/target/
 /project/project/
+/target/scala-2.11/
+/target/scala-2.12/
+/target/streams/
+/target/.history

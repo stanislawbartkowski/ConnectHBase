@@ -1,21 +1,19 @@
 import org.apache.hadoop.hbase.TableName
-import org.apache.hadoop.hbase.client.Table
-import org.apache.spark
+import org.apache.hadoop.hbase.client.{Connection, Table}
 import org.apache.spark.sql.datasources.hbase.HBaseTableCatalog
-import org.apache.hadoop.hbase.spark.HBaseContext
-import org.apache.spark.sql.execution.datasources
-import org.apache.hadoop.hbase.spark
-//import org.json4s.jackson.JsonMethods.pa
-import org.json4s
-import org.apache.hadoop.hbase.spark
 import org.apache.hadoop.conf.Configuration
+import org.apache.hadoop.hbase.spark.HBaseContext
+import org.apache.spark.SparkConf
+import org.apache.hadoop.security.UserGroupInformation
+import org.apache.spark.rdd.RDD
+import org.apache.spark.sql.Row
 
 
 object SparkHbase {
 
-  val catalog=
+  val catalog =
     s"""{
-       |"table":{"namespace":"default","name":"shakespearex"},
+       |"table":{"namespace":"default","name":"shakespeare"},
        |"rowkey":"key",
        |"columns":{
        |"key":{"cf":"rowkey","col":"key","type":"string"},
@@ -31,18 +29,30 @@ object SparkHbase {
 
     L.info("Open table " + tableName)
     val ss = SparkGetConf.get(prop)
-    val connection = HbaseGetConn.get(prop)
-    val table: Table = connection.getTable(tableN)
-    import org.apache.hadoop.hbase.spark.HBaseContext
 
-    val hbaseContext = new HBaseContext(ss.sparkContext,new Configuration())
+    val (confh: Configuration, connection: Connection) = HbaseGetConn.get(prop)
+    //    val table: Table = connection.getTable(tableN)
+
+
+    val hbaseContext = new HBaseContext(ss.sparkContext, confh)
     val hbaseDF = ss.read
       .options(Map(HBaseTableCatalog.tableCatalog -> catalog))
       .format("org.apache.hadoop.hbase.spark")
       .load()
     val num = hbaseDF.count()
-    L.info("NUmber of " + num)
-
+    L.info("Number of " + num)
+    // DataFrame is load, transform to RDD<String> to run WordCount
+    hbaseDF.printSchema()
+    var rdd : RDD[Row] = hbaseDF.rdd
+//    val num2 = rdd.count()
+//    val r : Array[Row] = rdd.take(5)
+//    println(r(2).getAs(1))
+    val textfile : RDD[String] = hbaseDF.rdd.map({
+      row => if (row.getAs(1) == null)  "" else row.getAs(1).toString
+    })
+//    val i = 1;
+//    val num1 = textfile.count()
+    SparkTestJob.numberofwords(ss,prop,textfile)
   }
 
 }

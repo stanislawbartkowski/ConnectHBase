@@ -12,7 +12,7 @@ object LoadHbase {
     val fName = prop.getHBaseFamily
     val cName = prop.getHBaseColumn
 
-    val connection = HbaseGetConn.get(prop)
+    val (_,connection) = HbaseGetConn.get(prop)
     L.info("Check the existence of table " + tableName)
     val tableN = TableName.valueOf(tableName)
     if (connection.getAdmin.tableExists(tableN)) {

@@ -1,11 +1,13 @@
 import org.apache.hadoop.hbase.HBaseConfiguration
 import org.apache.hadoop.hbase.client.{Connection, ConnectionFactory}
 import org.apache.hadoop.security.UserGroupInformation
+import org.apache.hadoop.conf.Configuration
+
 
 object HbaseGetConn {
 
-  def get(prop : Props) : Connection = {
-    val conf = HBaseConfiguration.create()
+  def get(prop: Props): (Configuration, Connection) = {
+    val conf: Configuration = HBaseConfiguration.create()
     if (prop.isKerberos) {
       L.info("Kerberos authentication " + prop.getPrincipal + " " + prop.getKeytab)
       conf.set("hadoop.security.authentication", "kerberos")
@@ -17,7 +19,7 @@ object HbaseGetConn {
       ugi.reloginFromKeytab
     }
 
-    ConnectionFactory.createConnection(conf)
+    (conf, ConnectionFactory.createConnection(conf))
   }
 
 
