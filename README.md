@@ -33,8 +33,10 @@ Clone the repository<br>
 
 | Variable | Default value | Description
 | --- | --- | -- |
-| LIB | /usr/hdp/current/hbase-client/lib/\*:/usr/hdp/current/spark2-client/jars/\* | Spark and HBase client libraries
+| LIB | /usr/hdp/current/spark2-client/jars/\*:/usr/hdp/current/hbase-client/lib/\* | Spark and HBase client libraries
 | CONF | /etc/hadoop/conf:/etc/hbase/conf | Hadoop and HBase configuration
+
+**Important**: the order in LIB variable matters. *spark2-client* libraries should precede *hbase-client* libraries.
 
 ## Customize param.properties
 
