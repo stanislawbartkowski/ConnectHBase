@@ -11,7 +11,9 @@ object SparkTestJob {
       .map(word => (word, 1))
       .reduceByKey(_ + _)
 
-    counts.foreach(println)
+    counts.foreach(
+      r => L.info(r._1 + " " + r._2)
+    )
     L.info("Total words: " + counts.count());
     counts.saveAsTextFile(prop.getOutput);
   }
