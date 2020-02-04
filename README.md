@@ -48,6 +48,8 @@ Clone the repository<br>
 | hbasefamily | cf1 | Column family
 | hbasecolumn | col | Column name
 
+# Kerberos 
+Make sure the user running the test is authenticated and valid Kerberos ticket is obtained.
 # sparktest
 A simple WordCount Spark job.<br>
 >  ./run.sh sparktest
